@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import org.bmhsla.breakout.factories.EntityFactory;
+import org.bmhsla.breakout.systems.InputSystem;
+import org.bmhsla.breakout.systems.RenderSystem;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class GameHandler extends ApplicationAdapter {
@@ -17,6 +20,11 @@ public class GameHandler extends ApplicationAdapter {
     public void create() {
         engine = new Engine();
 
+        engine.addSystem(new RenderSystem());
+        engine.addSystem(new InputSystem());
+
+        EntityFactory entityFactory = new EntityFactory();
+        engine.addEntity(entityFactory.createPaddleEntity());
     }
 
     @Override
