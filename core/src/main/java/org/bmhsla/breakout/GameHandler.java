@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import org.bmhsla.breakout.factories.EntityFactory;
+import org.bmhsla.breakout.systems.CollisionSystem;
 import org.bmhsla.breakout.systems.InputSystem;
 import org.bmhsla.breakout.systems.RenderSystem;
 
@@ -22,9 +23,12 @@ public class GameHandler extends ApplicationAdapter {
 
         engine.addSystem(new RenderSystem());
         engine.addSystem(new InputSystem());
+        engine.addSystem(new CollisionSystem());
 
         EntityFactory entityFactory = new EntityFactory();
         engine.addEntity(entityFactory.createPaddleEntity());
+        engine.addEntity(entityFactory.createBallEntity());
+
     }
 
     @Override
