@@ -2,11 +2,30 @@ package org.bmhsla.breakout.factories;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import org.bmhsla.breakout.components.*;
 
 public class EntityFactory {
+
+    private Color[] brickColors = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.ORANGE, Color.PURPLE};
+
+    public Entity createBrick(float x, float y, float width, float height) {
+        Entity brick = new Entity();
+        TypeTagComponent typeTag = new TypeTagComponent();
+        typeTag.tag = "brick";
+        brick.add(typeTag);
+
+        brick.add(new PositionComponent(x, y));
+
+        brick.add(new SizeComponent(width, height));
+
+        RenderComponent renderComponent = new RenderComponent();
+        renderComponent.color = brickColors[MathUtils.random(brickColors.length-1)];
+        brick.add(renderComponent);
+
+        return brick;
+    }
 
     public Entity createPaddleEntity() {
         Entity paddle = new Entity();
@@ -26,7 +45,7 @@ public class EntityFactory {
         paddle.add(sizeComponent);
 
         SpeedComponent speedComponent = new SpeedComponent();
-        speedComponent.speed = 200;
+        speedComponent.speed = 500;
         paddle.add(speedComponent);
 
         paddle.add(new RenderComponent());

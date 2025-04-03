@@ -24,6 +24,10 @@ public class RenderSystem extends EntitySystem {
             SizeComponent sizeComponent = entity.getComponent(SizeComponent.class);
             RenderComponent renderComponent = entity.getComponent(RenderComponent.class);
 
+            if(renderComponent.color != null) {
+                shapeRenderer.setColor(renderComponent.color);
+            }
+
             shapeRenderer.begin(renderComponent.shapeType);
             switch(renderComponent.shape) {
                 case RECTANGLE:
